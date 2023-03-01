@@ -9,6 +9,6 @@ module mybatis.generate.javafx {
 
     opens com.zengdw.mybatis.controller to javafx.fxml;
     opens com.zengdw.mybatis.config to javafx.base;
-    exports com.zengdw.mybatis;
     opens com.zengdw.mybatis.domain to javafx.base;
+    exports com.zengdw.mybatis;
 }
