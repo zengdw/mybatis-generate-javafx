@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.zengdw.mybatis.controller.TableSelectController">
+  <TableView fx:id="tableList" layoutX="52.0" layoutY="40.0" prefHeight="261.0" prefWidth="517.0">
+    <columns>
+      <TableColumn fx:id="selected" prefWidth="41.0">
+        <graphic>
+          <CheckBox mnemonicParsing="false" fx:id="allSelected"/>
+        </graphic>
+      </TableColumn>
+      <TableColumn fx:id="tableName" prefWidth="234.0" text="表名"/>
+      <TableColumn fx:id="remark" minWidth="0.0" prefWidth="225.0" text="描述"/>
+    </columns>
+  </TableView>
+  <Button layoutX="198.0" layoutY="331.0" mnemonicParsing="false" text="返回" onAction="#cancel"/>
+  <Button layoutX="346.0" layoutY="331.0" mnemonicParsing="false" text="确定" onAction="#submit"/>
+</AnchorPane>

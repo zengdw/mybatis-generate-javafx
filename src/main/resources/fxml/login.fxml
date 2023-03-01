@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+<AnchorPane prefWidth="447.0" stylesheets="@../css/main.css" xmlns="http://javafx.com/javafx/17.0.2-ea"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.zengdw.mybatis.controller.LoginController">
+  <Label layoutX="78.0" layoutY="40.0" text="类型"/>
+  <Label layoutX="78.0" layoutY="80.0" text="URL"/>
+  <Label layoutX="78.0" layoutY="120.0" text="账号"/>
+  <Label layoutX="78.0" layoutY="160.0" text="密码"/>
+  <RadioButton fx:id="oracle" layoutX="127.0" layoutY="40.0" mnemonicParsing="false" selected="true" text="Oracle"/>
+  <RadioButton fx:id="mysql" layoutX="251.0" layoutY="40.0" mnemonicParsing="false" text="Mysql"/>
+  <TextField fx:id="dataUrl" layoutX="127.0" layoutY="80.0" prefHeight="23.0" prefWidth="242.0"/>
+  <TextField fx:id="username" layoutX="127.0" layoutY="120.0" prefHeight="23.0" prefWidth="242.0"/>
+  <Button layoutX="171.0" layoutY="200.0" mnemonicParsing="false" onAction="#loginAction" prefHeight="28.0"
+          prefWidth="108.0" text="登      录"/>
+  <PasswordField fx:id="password" layoutX="127.0" layoutY="160.0" onKeyPressed="#enterPressed" prefHeight="23.0"
+                 prefWidth="242.0"/>
+  <Text fx:id="errorMsg" fill="#e10c0c" layoutX="10.0" layoutY="250" wrappingWidth="437.0"/>
+</AnchorPane>
