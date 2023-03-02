@@ -8,22 +8,22 @@ import com.zengdw.mybatis.service.MysqlServiceImpl;
 import com.zengdw.mybatis.service.OracleServiceImpl;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 /**
  * @author zengd
@@ -31,6 +31,8 @@ import java.util.ResourceBundle;
  * @date 2023/2/27 17:26
  */
 public class TableSelectController implements Initializable {
+    @FXML
+    private TextField filterTableName;
     @FXML
     private CheckBox allSelected;
     @FXML
@@ -42,6 +44,7 @@ public class TableSelectController implements Initializable {
     @FXML
     private TableColumn<Table, String> remark;
     private int clickAllCheckBox = 0;
+    private List<Table> tables;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -52,7 +55,9 @@ public class TableSelectController implements Initializable {
         }
 
         allSelected.selectedProperty().addListener((observableValue, oldValue, newValue) -> {
-            if (clickAllCheckBox == 2) return;
+            if (clickAllCheckBox == 2) {
+                return;
+            }
             clickAllCheckBox = 1;
             ObservableList<Table> items = tableList.getItems();
             if (allSelected.isSelected()) {
@@ -76,7 +81,7 @@ public class TableSelectController implements Initializable {
         } else {
             service = new MysqlServiceImpl();
         }
-        List<Table> tables = service.selectTable();
+        tables = service.selectTable();
         ObservableList<Table> teamMembers = FXCollections.observableArrayList(tables);
         selected.setCellValueFactory(cellData -> cellData.getValue().getCheckBox());
         selected.setCellFactory(new Callback<>() {
@@ -89,7 +94,9 @@ public class TableSelectController implements Initializable {
                         setGraphic(item);
                         if (null != item) {
                             item.selectedProperty().addListener((observableValue, oldValue, newValue) -> {
-                                if (clickAllCheckBox == 1) return;
+                                if (clickAllCheckBox == 1) {
+                                    return;
+                                }
                                 clickAllCheckBox = 2;
                                 boolean booSelectAll = true;
                                 ObservableList<Table> items2 = tableList.getItems();
@@ -133,5 +140,15 @@ public class TableSelectController implements Initializable {
         stage.show();
         Context.setStage("property", stage);
         Context.getStage("tableList").close();
+    }
+
+    @FXML
+    private void filterAction() {
+        String filterTableNameText = filterTableName.getText();
+        if (StringUtils.isNotBlank(filterTableNameText)) {
+            List<Table> list = tables.stream().filter(t -> t.getTableName().contains(filterTableNameText.toUpperCase())).toList();
+            ObservableList<Table> teamMembers = FXCollections.observableArrayList(list);
+            tableList.setItems(teamMembers);
+        }
     }
 }
