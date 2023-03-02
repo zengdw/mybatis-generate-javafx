@@ -2,10 +2,9 @@ package com.zengdw.mybatis.controller;
 
 import com.zengdw.mybatis.config.Context;
 import com.zengdw.mybatis.config.DatabaseConfig;
+import com.zengdw.mybatis.utils.StageUtil;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
@@ -59,20 +58,15 @@ public class LoginController implements Initializable {
     private void loginAction() {
         if (doLogin()) {
             Stage stage = new Stage();
-            FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/tableSelect.fxml"));
-            Scene scene;
             Stage loginStage = Context.getStage("login");
             try {
-                scene = new Scene(loader.load());
+                StageUtil.initStage(stage, "Table Select", "/fxml/tableSelect.fxml", "tableList");
             } catch (IOException e) {
                 errorMsg.setText(e.getCause().getMessage());
                 errorMsg.setVisible(true);
                 loginStage.sizeToScene();
                 throw new RuntimeException(e);
             }
-            stage.setScene(scene);
-            stage.show();
-            Context.setStage("tableList", stage);
             loginStage.close();
         }
     }

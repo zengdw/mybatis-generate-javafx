@@ -6,13 +6,11 @@ import com.zengdw.mybatis.domain.Table;
 import com.zengdw.mybatis.service.IDatabaseService;
 import com.zengdw.mybatis.service.MysqlServiceImpl;
 import com.zengdw.mybatis.service.OracleServiceImpl;
+import com.zengdw.mybatis.utils.StageUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
@@ -23,7 +21,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.stream.Collectors;
 
 /**
  * @author zengd
@@ -134,11 +131,7 @@ public class TableSelectController implements Initializable {
         DatabaseConfig.instance().setSelectedTable(selectedTable);
 
         Stage stage = new Stage();
-        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/property.fxml"));
-        Scene scene = new Scene(loader.load());
-        stage.setScene(scene);
-        stage.show();
-        Context.setStage("property", stage);
+        StageUtil.initStage(stage, "Property", "/fxml/property.fxml", "property");
         Context.getStage("tableList").close();
     }
 

@@ -15,6 +15,6 @@ public class MybatisApplication extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        StageUtil.initStage(primaryStage, "Mybatis Generate", "/fxml/login.fxml", "login");
+        StageUtil.initStage(primaryStage, "", "/fxml/login.fxml", "login");
     }
 }

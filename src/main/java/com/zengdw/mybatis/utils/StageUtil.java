@@ -18,7 +18,7 @@ public class StageUtil {
         FXMLLoader loader = new FXMLLoader(StageUtil.class.getResource(fxmlUrl));
         Scene scene = new Scene(loader.load());
         stage.setScene(scene);
-        stage.setTitle(title);
+        stage.setTitle("Mybatis Generate - " + title);
         stage.setResizable(false);
         Image image = new Image(StageUtil.class.getResourceAsStream("/images/mybatis.png"));
         stage.getIcons().add(image);
