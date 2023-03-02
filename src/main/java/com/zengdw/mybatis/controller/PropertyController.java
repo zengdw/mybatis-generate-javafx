@@ -23,7 +23,6 @@ public class PropertyController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
     }
-
     @FXML
     private void selectDirectory() {
         DirectoryChooser dc = new DirectoryChooser();
