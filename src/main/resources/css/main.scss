@@ -6,6 +6,7 @@
   -fx-background-color: green;
   -fx-text-fill: #fff;
 }
+
 .table {
   -fx-border-color: #659ba4;
   -fx-border-radius: 3;
@@ -13,4 +14,10 @@
   &:focused {
     -fx-border-color: #fff;
   }
+}
+
+.border-top {
+  -fx-border-style: solid none none none;
+  -fx-border-color: #a19a9a;
+  -fx-border-width: 1;
 }

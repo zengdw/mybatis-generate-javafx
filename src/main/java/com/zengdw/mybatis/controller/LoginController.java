@@ -10,7 +10,8 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.text.Text;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.apache.commons.lang3.StringUtils;
 
@@ -25,7 +26,11 @@ import java.util.ResourceBundle;
  */
 public class LoginController implements Initializable {
     @FXML
-    private Text errorMsg;
+    private VBox vbox;
+    @FXML
+    private HBox databaseHbox;
+    @FXML
+    private TextField database;
     @FXML
     private RadioButton oracle;
     @FXML
@@ -39,11 +44,22 @@ public class LoginController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        vbox.getChildren().remove(databaseHbox);
+
         ToggleGroup group = new ToggleGroup();
         oracle.setToggleGroup(group);
         mysql.setToggleGroup(group);
 
-        errorMsg.setVisible(false);
+        group.selectedToggleProperty().addListener((observableValue, oldValue, newValue) -> {
+            RadioButton radioButton = (RadioButton) newValue;
+            String text = radioButton.getText();
+            if ("Mysql".equals(text)) {
+                vbox.getChildren().add(2, databaseHbox);
+                database.getStyleClass().remove("border-red");
+            } else {
+                vbox.getChildren().remove(databaseHbox);
+            }
+        });
 
         dataUrl.setText(DatabaseConfig.instance().getUrl());
         username.setText(DatabaseConfig.instance().getUserName());
@@ -52,22 +68,14 @@ public class LoginController implements Initializable {
         removeClass(dataUrl);
         removeClass(username);
         removeClass(password);
+        removeClass(database);
     }
 
     @FXML
-    private void loginAction() {
+    private void loginAction() throws IOException {
         if (doLogin()) {
-            Stage stage = new Stage();
-            Stage loginStage = Context.getStage("login");
-            try {
-                StageUtil.initStage(stage, "Table Select", "/fxml/tableSelect.fxml", "tableList");
-            } catch (IOException e) {
-                errorMsg.setText(e.getCause().getMessage());
-                errorMsg.setVisible(true);
-                loginStage.sizeToScene();
-                throw new RuntimeException(e);
-            }
-            loginStage.close();
+            StageUtil.initStage(new Stage(), "Table Select", "/fxml/tableSelect.fxml", "tableList");
+            Context.getStage("login").close();
         }
     }
 
@@ -75,11 +83,15 @@ public class LoginController implements Initializable {
         boolean isNotBlank = checkBlank(dataUrl);
         isNotBlank = isNotBlank && checkBlank(username);
         isNotBlank = isNotBlank && checkBlank(password);
+        if (mysql.isSelected()) {
+            isNotBlank = isNotBlank && checkBlank(database);
+        }
         if (!isNotBlank) {
             return false;
         }
         DatabaseConfig.instance()
                 .setDataType(oracle.isSelected() ? "Oracle" : "Mysql")
+                .setDatabase(database.getText())
                 .setUserName(username.getText())
                 .setPassword(password.getText())
                 .setUrl(dataUrl.getText());
@@ -99,7 +111,7 @@ public class LoginController implements Initializable {
     }
 
     @FXML
-    private void enterPressed(KeyEvent keyEvent) {
+    private void enterPressed(KeyEvent keyEvent) throws IOException {
         if ("ENTER".equals(keyEvent.getCode().name())) {
             loginAction();
         }

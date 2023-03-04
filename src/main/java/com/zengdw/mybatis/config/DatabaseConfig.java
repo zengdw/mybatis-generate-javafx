@@ -16,9 +16,10 @@ import java.util.List;
 public class DatabaseConfig {
     private static DatabaseConfig instance;
     private String dataType;
-    private String url = "jdbc:oracle:thin:@192.168.3.92:1521:orcl";
-    private String userName = "apcos_1110";
-    private String password = "apcos_1110";
+    private String url = "jdbc:mysql://172.19.56.120:3306/test";
+    private String userName = "root";
+    private String password = "root";
+    private String database;
     private List<Table> selectedTable;
 
     private DatabaseConfig() {

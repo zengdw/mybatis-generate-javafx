@@ -3,7 +3,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
+<AnchorPane styleClass="border-top" prefWidth="600.0" stylesheets="@../css/main.css" xmlns="http://javafx.com/javafx/19"
+            xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.zengdw.mybatis.controller.PropertyController">
   <VBox prefHeight="400.0" prefWidth="600.0">
     <HBox alignment="CENTER" cache="true" nodeOrientation="LEFT_TO_RIGHT" prefHeight="39.0" prefWidth="600.0"
