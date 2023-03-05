@@ -24,7 +24,7 @@
           <Text accessibleRole="CHECK_BOX" fill="#e10707" strokeType="OUTSIDE" strokeWidth="0.0" text="*"/>
         </graphic>
       </Label>
-      <TextField prefHeight="23.0" prefWidth="350.0" promptText="com.example.domain"/>
+      <TextField onKeyReleased="#modelPathChange" prefHeight="23.0" prefWidth="350.0" promptText="com.example.domain"/>
     </HBox>
     <HBox alignment="CENTER_LEFT" cache="true" nodeOrientation="LEFT_TO_RIGHT" prefHeight="45.0" prefWidth="600.0"
           spacing="10.0">
@@ -33,7 +33,7 @@
           <Text accessibleRole="CHECK_BOX" fill="#e10707" strokeType="OUTSIDE" strokeWidth="0.0" text="*"/>
         </graphic>
       </Label>
-      <TextField prefHeight="23.0" prefWidth="350.0" promptText="com.example.mapper"/>
+      <TextField onKeyReleased="#mapperPath" prefHeight="23.0" prefWidth="350.0" promptText="com.example.mapper"/>
     </HBox>
     <HBox alignment="CENTER_LEFT" cache="true" nodeOrientation="LEFT_TO_RIGHT" prefHeight="45.0" prefWidth="600.0"
           spacing="10.0">
@@ -42,42 +42,48 @@
           <Text accessibleRole="CHECK_BOX" fill="#e10707" strokeType="OUTSIDE" strokeWidth="0.0" text="*"/>
         </graphic>
       </Label>
-      <TextField prefHeight="23.0" prefWidth="350.0" promptText="com.example.xml"/>
+      <TextField onKeyReleased="#mapperXmlPath" prefHeight="23.0" prefWidth="350.0" promptText="com.example.xml"/>
     </HBox>
     <HBox alignment="CENTER_LEFT" cache="true" nodeOrientation="LEFT_TO_RIGHT" prefHeight="45.0" prefWidth="600.0"
           spacing="10.0">
       <Label alignment="CENTER_RIGHT" prefHeight="23.0" prefWidth="120.0" text="实体父类" textAlignment="CENTER"/>
-      <TextField prefHeight="23.0" prefWidth="350.0"/>
+      <TextField onKeyReleased="#modelSuperClassPath" prefHeight="23.0" prefWidth="350.0"/>
     </HBox>
-    <HBox alignment="CENTER_LEFT" cache="true" nodeOrientation="LEFT_TO_RIGHT" prefHeight="45.0" prefWidth="600.0"
+    <HBox alignment="CENTER_LEFT" cache="true" nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0" prefWidth="600.0"
           spacing="10.0">
-      <children>
-        <CheckBox mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" text="Lombok"/>
-        <CheckBox layoutX="10.0" layoutY="25.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT"
-                  text="mybatis plus"/>
-        <CheckBox layoutX="98.0" layoutY="25.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT"
-                  text="合并异常退出"/>
-        <CheckBox layoutX="186.0" layoutY="25.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT"
-                  text="example"/>
-      </children>
       <padding>
         <Insets left="130.0"/>
       </padding>
+      <CheckBox mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#needLombok" text="Lombok"/>
+      <CheckBox layoutX="10.0" layoutY="25.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT"
+                onMouseClicked="#needMybatisPlus" text="mybatis plus"/>
+      <CheckBox layoutX="98.0" layoutY="25.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT"
+                onMouseClicked="#mergeFailed" text="合并异常退出"/>
+      <CheckBox layoutX="186.0" layoutY="25.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT"
+                onMouseClicked="#generateType" text="example"/>
     </HBox>
     <HBox alignment="CENTER_LEFT" cache="true" nodeOrientation="LEFT_TO_RIGHT" prefHeight="45.0" prefWidth="600.0"
           spacing="10.0">
       <Label alignment="CENTER_RIGHT" prefHeight="23.0" prefWidth="120.0" text="忽略表前缀" textAlignment="CENTER"/>
-      <TextField prefHeight="23.0" prefWidth="135.0"/>
+      <TextField onKeyReleased="#tableNamePre" prefHeight="23.0" prefWidth="135.0"/>
       <Label alignment="CENTER_RIGHT" prefHeight="23.0" prefWidth="72.0" text="忽略表后缀" textAlignment="CENTER"/>
-      <TextField prefHeight="23.0" prefWidth="129.0"/>
+      <TextField onKeyReleased="#tableNameSuf" prefHeight="23.0" prefWidth="129.0"/>
     </HBox>
     <HBox alignment="CENTER" cache="true" nodeOrientation="LEFT_TO_RIGHT" prefHeight="45.0" prefWidth="600.0"
           spacing="100.0">
       <Button mnemonicParsing="false" onMouseClicked="#cancel" prefHeight="23.0" prefWidth="81.0" text="返  回"/>
-      <Button mnemonicParsing="false" prefHeight="23.0" prefWidth="75.0" styleClass="btn" text="确  定"/>
+      <Button mnemonicParsing="false" onMouseClicked="#submit" prefHeight="23.0" prefWidth="75.0" styleClass="btn"
+              text="确  定"/>
     </HBox>
     <padding>
       <Insets top="10.0"/>
     </padding>
   </VBox>
+  <ScrollPane styleClass="border-top" fx:id="scroll" layoutY="366.0" maxHeight="120.0" minHeight="0.0"
+              prefWidth="600.0">
+    <VBox id="vbox" prefWidth="570.0"/>
+    <padding>
+      <Insets left="10.0"/>
+    </padding>
+  </ScrollPane>
 </AnchorPane>

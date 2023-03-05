@@ -1,7 +1,7 @@
 package com.zengdw.mybatis.controller;
 
 import com.zengdw.mybatis.config.Context;
-import com.zengdw.mybatis.config.DatabaseConfig;
+import com.zengdw.mybatis.config.GeneratorProperties;
 import com.zengdw.mybatis.utils.StageUtil;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -61,9 +61,9 @@ public class LoginController implements Initializable {
             }
         });
 
-        dataUrl.setText(DatabaseConfig.instance().getUrl());
-        username.setText(DatabaseConfig.instance().getUserName());
-        password.setText(DatabaseConfig.instance().getPassword());
+        dataUrl.setText(GeneratorProperties.of().getUrl());
+        username.setText(GeneratorProperties.of().getUserName());
+        password.setText(GeneratorProperties.of().getPassword());
 
         removeClass(dataUrl);
         removeClass(username);
@@ -89,7 +89,7 @@ public class LoginController implements Initializable {
         if (!isNotBlank) {
             return false;
         }
-        DatabaseConfig.instance()
+        GeneratorProperties.of()
                 .setDataType(oracle.isSelected() ? "Oracle" : "Mysql")
                 .setDatabase(database.getText())
                 .setUserName(username.getText())

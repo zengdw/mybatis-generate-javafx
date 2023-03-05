@@ -2,7 +2,7 @@ package com.zengdw.mybatis.controller;
 
 import com.zengdw.mybatis.component.LoadingCom;
 import com.zengdw.mybatis.config.Context;
-import com.zengdw.mybatis.config.DatabaseConfig;
+import com.zengdw.mybatis.config.GeneratorProperties;
 import com.zengdw.mybatis.domain.Table;
 import com.zengdw.mybatis.service.IDatabaseService;
 import com.zengdw.mybatis.service.MysqlServiceImpl;
@@ -83,7 +83,7 @@ public class TableSelectController implements Initializable {
                 return new Task<>() {
                     @Override
                     protected List<Table> call() throws Exception {
-                        String dataType = DatabaseConfig.instance().getDataType();
+                        String dataType = GeneratorProperties.of().getDataType();
                         IDatabaseService service;
                         if ("Oracle".equals(dataType)) {
                             service = new OracleServiceImpl();
@@ -155,8 +155,13 @@ public class TableSelectController implements Initializable {
 
     @FXML
     private void submit() throws IOException {
-        List<Table> selectedTable = tableList.getItems().stream().filter(t -> t.getSelected().isSelected()).toList();
-        DatabaseConfig.instance().setSelectedTable(selectedTable);
+        List<String> selectedTable = tableList.getItems().stream().filter(t -> t.getSelected().isSelected()).map(Table::getTableName).toList();
+        if (selectedTable.size() == 0) {
+            errorMsg.setText("请选择表");
+            errorMsg.setVisible(true);
+            return;
+        }
+        GeneratorProperties.of().setTables(selectedTable);
 
         Stage stage = new Stage();
         StageUtil.initStage(stage, "Property", "/fxml/property.fxml", "property");

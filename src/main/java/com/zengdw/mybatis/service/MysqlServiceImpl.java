@@ -1,6 +1,6 @@
 package com.zengdw.mybatis.service;
 
-import com.zengdw.mybatis.config.DatabaseConfig;
+import com.zengdw.mybatis.config.GeneratorProperties;
 import com.zengdw.mybatis.domain.Table;
 
 import java.sql.*;
@@ -18,9 +18,9 @@ public class MysqlServiceImpl implements IDatabaseService {
         List<Table> list = new ArrayList<>();
         //加载数据库驱动
         Class.forName("com.mysql.cj.jdbc.Driver");
-        try (Connection conn = DriverManager.getConnection(DatabaseConfig.instance().getUrl(), DatabaseConfig.instance().getUserName(), DatabaseConfig.instance().getPassword()); Statement statement = conn.createStatement()) {
+        try (Connection conn = DriverManager.getConnection(GeneratorProperties.of().getUrl(), GeneratorProperties.of().getUserName(), GeneratorProperties.of().getPassword()); Statement statement = conn.createStatement()) {
             //执行sql
-            ResultSet resultSet = statement.executeQuery("SELECT TABLE_NAME, TABLE_COMMENT FROM information_schema.TABLES WHERE TABLE_SCHEMA = '" + DatabaseConfig.instance().getDatabase() + "'");
+            ResultSet resultSet = statement.executeQuery("SELECT TABLE_NAME, TABLE_COMMENT FROM information_schema.TABLES WHERE TABLE_SCHEMA = '" + GeneratorProperties.of().getDatabase() + "'");
             while (resultSet.next()) {
                 String tableName = resultSet.getString("TABLE_NAME");
                 String comments = resultSet.getString("TABLE_COMMENT");

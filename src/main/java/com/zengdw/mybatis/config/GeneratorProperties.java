@@ -1,6 +1,7 @@
 package com.zengdw.mybatis.config;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import java.util.List;
 
@@ -9,6 +10,7 @@ import java.util.List;
  * @date 2023/3/5 7:32
  */
 @Data
+@Accessors(chain = true)
 public class GeneratorProperties {
     /**
      * 项目地址 全路径
@@ -40,11 +42,6 @@ public class GeneratorProperties {
     private String modelSuperClassPath;
 
     /**
-     * 需要生成代码的表名
-     */
-    private List<String> tables;
-
-    /**
      * 是否需要mybatis plus
      */
     private boolean needMybatisPlus = false;
@@ -52,6 +49,10 @@ public class GeneratorProperties {
      * 表前缀
      */
     private String tableNamePre;
+    /**
+     * 表后缀
+     */
+    private String tableNameSuf;
     /**
      * 文件合并失败是否继续，默认退出
      */
@@ -62,4 +63,31 @@ public class GeneratorProperties {
      * MyBatis3Simple 不生成example
      */
     private boolean generateType;
+    private String dataType;
+    private String url = "jdbc:mysql://172.19.56.120:3306/test";
+    private String userName = "root";
+    private String password = "root";
+    private String database;
+    private List<String> tables;
+
+    private static GeneratorProperties instance;
+
+    private GeneratorProperties() {
+
+    }
+
+    public static GeneratorProperties of() {
+        if (null == instance) {
+            instance = new GeneratorProperties();
+        }
+        return instance;
+    }
+
+    public String getDriverClass() {
+        if ("oracle".equals(this.dataType)) {
+            return "oracle.jdbc.OracleDriver";
+        } else {
+            return "com.mysql.cj.jdbc.Driver";
+        }
+    }
 }
