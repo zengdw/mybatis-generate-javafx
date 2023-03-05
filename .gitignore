@@ -31,3 +31,4 @@ build/
 .vscode/
 
 rebel.xml
+/src/main/resources/css/.sass-cache/

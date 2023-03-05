@@ -17,7 +17,7 @@
       <TableColumn fx:id="remark" minWidth="0.0" prefWidth="225.0" text="描述"/>
     </columns>
   </TableView>
-  <Button layoutX="190.0" layoutY="335.0" mnemonicParsing="false" onAction="#cancel" styleClass="btn" text="返  回" />
+  <Button layoutX="190.0" layoutY="335.0" mnemonicParsing="false" onAction="#cancel" text="返  回" />
   <Button layoutX="337.0" layoutY="335.0" mnemonicParsing="false" onAction="#submit" styleClass="btn" text="确  定" />
   <TextField fx:id="filterTableName" layoutX="37.0" layoutY="20.0" onKeyPressed="#filterAction" prefHeight="23.0" prefWidth="240.0" promptText="输入表名过滤" />
   <Text fx:id="errorMsg" visible="false" fill="#e10c0c" layoutX="10.0" layoutY="375" wrappingWidth="437.0"/>

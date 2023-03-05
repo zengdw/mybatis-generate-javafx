@@ -43,7 +43,6 @@ public class LoadingCom {
         vBox.setPrefHeight(h);
         vBox.setStyle("-fx-background-color: rgba(239,233,233,0.8)");
 
-        System.out.println("loading");
         parent.getChildren().add(vBox);
     }
 

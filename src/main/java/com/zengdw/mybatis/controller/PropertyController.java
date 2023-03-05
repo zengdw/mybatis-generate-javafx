@@ -1,8 +1,9 @@
 package com.zengdw.mybatis.controller;
 
+import com.zengdw.mybatis.config.Context;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 
@@ -17,18 +18,26 @@ import java.util.ResourceBundle;
  */
 public class PropertyController implements Initializable {
     @FXML
-    private Button selectDirectory;
+    private TextField projectPath;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        projectPath.onActionProperty().addListener((observableValue, h1, h2) -> selectDirectory());
     }
+
     @FXML
     private void selectDirectory() {
         DirectoryChooser dc = new DirectoryChooser();
-        dc.setTitle("source directory select");
+        dc.setTitle("project directory select");
         dc.setInitialDirectory(new File(System.getProperty("user.home")));
-        Stage stage = (Stage) selectDirectory.getScene().getWindow();
-        dc.showDialog(stage);
+        Stage stage = (Stage) projectPath.getScene().getWindow();
+        File file = dc.showDialog(stage);
+        projectPath.setText(null != file ? file.getAbsolutePath() : projectPath.getText());
+    }
+
+    @FXML
+    private void cancel() {
+        Context.getStage("tableList").show();
+        Context.getStage("property").close();
     }
 }
