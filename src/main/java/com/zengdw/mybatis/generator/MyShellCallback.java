@@ -43,7 +43,7 @@ public class MyShellCallback implements ShellCallback {
             throws ShellException {
         File project = new File(targetProject);
         if (!project.exists()) {
-            if (project.mkdirs()) {
+            if (!project.mkdirs()) {
                 throw new ShellException("文件夹" + targetProject + "创建失败");
             }
         }

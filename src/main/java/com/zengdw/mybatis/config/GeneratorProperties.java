@@ -84,7 +84,7 @@ public class GeneratorProperties {
     }
 
     public String getDriverClass() {
-        if ("oracle".equals(this.dataType)) {
+        if ("Oracle".equals(this.dataType)) {
             return "oracle.jdbc.OracleDriver";
         } else {
             return "com.mysql.cj.jdbc.Driver";
