@@ -1,6 +1,7 @@
 package com.zengdw.mybatis.controller;
 
 import com.zengdw.mybatis.config.Context;
+import com.zengdw.mybatis.config.DatabaseTypeEnum;
 import com.zengdw.mybatis.config.GeneratorProperties;
 import com.zengdw.mybatis.utils.StageUtil;
 import javafx.fxml.FXML;
@@ -90,7 +91,7 @@ public class LoginController implements Initializable {
             return false;
         }
         GeneratorProperties.of()
-                .setDataType(oracle.isSelected() ? "Oracle" : "Mysql")
+                .setDataType(oracle.isSelected() ? DatabaseTypeEnum.Oracle : DatabaseTypeEnum.Mysql)
                 .setDatabase(database.getText())
                 .setUserName(username.getText())
                 .setPassword(password.getText())

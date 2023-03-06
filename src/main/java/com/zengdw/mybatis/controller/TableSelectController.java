@@ -2,6 +2,7 @@ package com.zengdw.mybatis.controller;
 
 import com.zengdw.mybatis.component.LoadingCom;
 import com.zengdw.mybatis.config.Context;
+import com.zengdw.mybatis.config.DatabaseTypeEnum;
 import com.zengdw.mybatis.config.GeneratorProperties;
 import com.zengdw.mybatis.domain.Table;
 import com.zengdw.mybatis.service.IDatabaseService;
@@ -83,9 +84,9 @@ public class TableSelectController implements Initializable {
                 return new Task<>() {
                     @Override
                     protected List<Table> call() throws Exception {
-                        String dataType = GeneratorProperties.of().getDataType();
+                        DatabaseTypeEnum dataType = GeneratorProperties.of().getDataType();
                         IDatabaseService service;
-                        if ("Oracle".equals(dataType)) {
+                        if (DatabaseTypeEnum.Oracle.equals(dataType)) {
                             service = new OracleServiceImpl();
                         } else {
                             service = new MysqlServiceImpl();

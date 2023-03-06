@@ -63,7 +63,7 @@ public class GeneratorProperties {
      * MyBatis3Simple 不生成example
      */
     private boolean generateType;
-    private String dataType;
+    private DatabaseTypeEnum dataType;
     private String url = "jdbc:mysql://172.19.56.120:3306/test";
     private String userName = "root";
     private String password = "root";
@@ -84,7 +84,7 @@ public class GeneratorProperties {
     }
 
     public String getDriverClass() {
-        if ("Oracle".equals(this.dataType)) {
+        if (DatabaseTypeEnum.Oracle.equals(this.dataType)) {
             return "oracle.jdbc.OracleDriver";
         } else {
             return "com.mysql.cj.jdbc.Driver";

@@ -46,6 +46,18 @@ public class PropertyController implements Initializable {
     @FXML
     private TextField projectPath;
     private final Configuration configuration;
+    private final Service<Void> service = new Service<>() {
+        @Override
+        protected Task<Void> createTask() {
+            return new Task<>() {
+                @Override
+                protected Void call() throws Exception {
+                    generate();
+                    return null;
+                }
+            };
+        }
+    };
 
     public PropertyController() throws IOException {
         configuration = new Configuration(Configuration.VERSION_2_3_32);
@@ -131,18 +143,6 @@ public class PropertyController implements Initializable {
         VBox vBox = (VBox) scroll.lookup("#vbox");
         vBox.getChildren().remove(0, vBox.getChildren().size());
         vBox.setPrefHeight(120);
-        Service<Void> service = new Service<>() {
-            @Override
-            protected Task<Void> createTask() {
-                return new Task<>() {
-                    @Override
-                    protected Void call() throws Exception {
-                        generate();
-                        return null;
-                    }
-                };
-            }
-        };
         service.start();
     }
 
@@ -182,7 +182,6 @@ public class PropertyController implements Initializable {
             }
         }
     }
-
     private void print(String msg) {
         Text tf = new Text(msg);
         tf.setStyle("-fx-fill: red;-fx-wrap-text: 595;");
