@@ -8,6 +8,7 @@
         <plugin type="org.mybatis.generator.plugins.SerializablePlugin">
             <property name="suppressJavaInterface" value="false"/>
         </plugin>
+        <plugin type="com.zengdw.mybatis.plugins.EmptyStrPlugin"/>
 
         <commentGenerator type="com.zengdw.mybatis.generator.CommentGenerator"/>
 

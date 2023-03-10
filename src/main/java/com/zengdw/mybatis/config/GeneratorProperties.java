@@ -64,9 +64,9 @@ public class GeneratorProperties {
      */
     private boolean generateType;
     private DatabaseTypeEnum dataType;
-    private String url = "jdbc:mysql://172.19.56.120:3306/test";
-    private String userName = "root";
-    private String password = "root";
+    private String url = "jdbc:oracle:thin:@192.168.3.92:1521:orcl";
+    private String userName = "apcos_1110";
+    private String password = "apcos_1110";
     private String database;
     private List<String> tables;
 

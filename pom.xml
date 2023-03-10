@@ -87,6 +87,47 @@
           <encoding>UTF-8</encoding>
         </configuration>
       </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>3.3.0</version>
+      </plugin>
+
+      <!--<plugin>
+        <groupId>io.github.fvarrui</groupId>
+        <artifactId>javapackager</artifactId>
+        <version>1.7.0</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>package</goal>
+            </goals>
+            <configuration>
+              <mainClass>com.zengdw.mybatis.AppMain</mainClass>
+              <bundleJre>true</bundleJre>
+              <jrePath>D:\jdk-17.0.2</jrePath>
+              <generateInstaller>true</generateInstaller>
+              <administratorRequired>false</administratorRequired>
+              &lt;!&ndash; 操作系统&ndash;&gt;
+              <platform>windows</platform>
+              <copyDependencies>true</copyDependencies>
+              &lt;!&ndash; 名称与版本&ndash;&gt;
+              <displayName>Mybatis-Generate</displayName>
+              <name>Mybatis-Generate</name>
+              <version>1.0</version>
+              &lt;!&ndash;详细参数配置&ndash;&gt;
+              <winConfig>
+                <icoFile>E:\ideaProject\mybatis-generate-javafx\src\main\resources\images\mybatis.png</icoFile>
+                <generateSetup>false</generateSetup>
+                <generateMsi>false</generateMsi>
+                <generateMsm>false</generateMsm>
+              </winConfig>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>-->
     </plugins>
   </build>
 </project>
