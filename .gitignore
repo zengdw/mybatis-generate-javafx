@@ -33,3 +33,4 @@ build/
 rebel.xml
 /src/main/resources/css/.sass-cache/
 /logs/
+/out/
